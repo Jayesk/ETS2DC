@@ -1,8 +1,7 @@
-# AP4ETS2
-Real time adapting auto pilot for Euro Truck Simulator 2.
+# ETS2 Data Collection // Jayesk's Screenshotter
+ETS2 Data Collection (sometimes refered to as Jayesk's Screenshotter) is my publicly avaliable software for collecting data to train AI on, its intended for use with Euro Truck Simulator 2 but can be easily repurposed by changing the area you want it to screenshot to be able to train all sorts of different AI. Currently, it is being used by myself to capture images of driving on ETS2 and then feeding this data to the training model to analyse and become more powerful with.
 
-# Jayesk's Screenshotter
-Jayesk's Screenshotter is my publicly avaliable software for collecting data to train my AI models on. It has various options, most of which do not function at the moment.
+This program is licensed under the GPL-3.0 license which means all changes of the program must be publicly avaliable. If you want to share your changes on the 'Issues' page, I would be grateful as it helps me improve the program for many others to use.
 
 # Setup Instructions
 1. Download the Screenshotter from [here.](https://github.com/Jayesk/AP4ETS2/releases/download/v0.1/Jayesk.s.Screenshotter.-.ETS2.Data.Collection.zip)
@@ -49,5 +48,5 @@ Works if you know how to use it, it should really be under Troubleshooting.
 Not currently working, presets will be added soon, the pop-up proclaiming the Scania S preset has been loaded was purely for testing.
 
 ### Screenshot Counter
-Currently not working. Will be used to set the Screenshots Taken counter manually and to troubleshoot potential errors.
+Not currently working, will be used in the future to set the Screenshots Taken counter manually and to troubleshoot potential errors with it showing incorrect figures.
 
