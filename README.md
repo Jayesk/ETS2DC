@@ -4,7 +4,7 @@ ETS2 Data Collection (sometimes refered to as Jayesk's Screenshotter) is my publ
 This program is licensed under the GPL-3.0 license which means all changes of the program must be publicly avaliable. If you want to share your changes on the 'Issues' page, I would be grateful as it helps me improve the program for many others to use.
 
 # Setup Instructions
-1. Download the Screenshotter from [here.](https://github.com/Jayesk/AP4ETS2/releases/download/v0.1/Jayesk.s.Screenshotter.-.ETS2.Data.Collection.zip)
+1. Download the Screenshotter from [here.](https://github.com/Jayesk/AP4ETS2/releases/download/v0.2/Jayesk.s.Screenshotter.-.ETS2.Data.Collection.zip)
 2. Extract the .zip file into a folder.
 3. If not already there, create a folder called 'captured'.
 4. Open 'install_requirements.bat' and wait for the required plugins to be installed.
@@ -18,7 +18,6 @@ This program is licensed under the GPL-3.0 license which means all changes of th
 - Screenshot Preview Size.
 - Presets for most trucks in the game.
 - More intuitive settings menu/UI.
-- Fixes for broken elements.
 - Keybinds.
 
 ## Features and Settings
@@ -48,5 +47,5 @@ Works if you know how to use it, it should really be under Troubleshooting.
 Not currently working, presets will be added soon, the pop-up proclaiming the Scania S preset has been loaded was purely for testing.
 
 ### Screenshot Counter
-Not currently working, will be used in the future to set the Screenshots Taken counter manually and to troubleshoot potential errors with it showing incorrect figures.
+Used to set the Screenshots Taken counter manually and to troubleshoot potential errors with it showing incorrect figures.
 
