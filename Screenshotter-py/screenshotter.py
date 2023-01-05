@@ -6,17 +6,15 @@ import pyautogui
 import time
 from PIL import Image
 
+
+
 # Set Screenshot Area
 f = open("config.txt", "r")
 ftext = str(f.readlines())
-ftext2 = ftext.replace('{', '')
-ftext3 = ftext2.replace('}', '')
-ftext4 = ftext3.replace('{', '')
-ftext5 = ftext4.replace('\'', '')
-ftext6 = ftext5.replace('[', '')
-ftext7 = ftext6.replace(']', '')
-print(ftext7)
-coordinatesforscreenshot = ftext7
+for c in "{}'[]":
+    ftext = ftext.replace(c, "")
+print(ftext)
+coordinatesforscreenshot = ftext
 f.close()
 f = open("config.txt", "r")
 f.close()
@@ -28,6 +26,7 @@ class App:
         self.root = tk.Tk()
         self.root.title("Jayesk's Screenshotter")
         self.root.geometry("350x200")  # Set the size of the window
+        self.root.iconbitmap("icon.ico")
 
         # Create the menubar
         self.menubar = tk.Menu(self.root)
@@ -89,61 +88,44 @@ class App:
 
     def coordfinder(self):
         self.coordfinder = tk.Toplevel(self.root)
-        self.coordfinder.geometry("160x56")
-        self.set_button = tk.Button(self.coordfinder, text="Get 1st Set Of Coords...", command=self.firstcoordset)
+        self.coordfinder.geometry("160x84")
+        self.coordfinder.iconbitmap("icon.ico")
+        self.set_button = tk.Button(self.coordfinder, text="Get 1st Set Of Coords...", command=self.coordset)
         self.set_button.pack()
-        self.set_button = tk.Button(self.coordfinder, text="Get 2nd Set Of Coords...", command=self.secondcoordset)
+        self.set_button = tk.Button(self.coordfinder, text="Get 2nd Set Of Coords...", command=self.coordset)
+        self.set_button.pack()
+        self.set_button = tk.Button(self.coordfinder, text="Clear Coords...", command=self.coordclear)
         self.set_button.pack()
 
-    def firstcoordset(self):
-        self.firstcoordset = tk.Toplevel(self.root)
+    def coordset(self):
 
+        coordset = tk.Toplevel(self.root)
+
+        f = open("config.txt", "a+")
+        fchar = f.read()
         screen_width, screen_height = pyautogui.size()
 
         time.sleep(5)
         x, y = pyautogui.position()
         y = screen_height - y
 
-        T = tk.Text(self.firstcoordset, height=2, width=90)
-        T.pack()
-        T.insert(tk.END, (f'x: {x}, y: {y}'))
-        c3 = {x}
-        d4 = {y}
+        text = tk.Text(coordset, height=2, width=90)
+        text.pack()
+        text.insert(tk.END, f"x: {x}, y: {y}")
 
+        f.write(f"{x}, {y}, ")
+        f.close()
+
+    def coordclear(self):
         f = open("config.txt", "w+")
-        f.write(str(c3))
-        f.write(", ")
-        f.write(str(d4))
-        f.write(", ")
+        f.truncate(0)
         f.close()
-
-
-
-    def secondcoordset(self):
-        self.secondcoordset = tk.Toplevel(self.root)
-
-        screen_width, screen_height = pyautogui.size()
-
-        time.sleep(5)
-        x, y = pyautogui.position()
-        y = screen_height - y
-
-        T = tk.Text(self.secondcoordset, height=2, width=90)
-        T.pack()
-        T.insert(tk.END, (f'x: {x}, y: {y}'))
-        a1 = {x}
-        b2 = {y}
-
-        f = open("config.txt", "a")
-        f.write(str(a1))
-        f.write(", ")
-        f.write(str(b2))
-        f.close()
-
-
+        tk.messagebox.showinfo("Coords Cleared.", "Coords have been cleared, you can now enter new coords.")
 
     def screenshotcountermenu(self):
         self.screenshotcountermenu = tk.Toplevel(self.root)
+        self.screenshotcountermenu.geometry("250x84")
+        self.screenshotcountermenu.iconbitmap("icon.ico")
 
         # Create the Screenshot count label
         self.scrnshotctr = tk.Label(self.screenshotcountermenu, text="Enter Screenshot Count:")
@@ -158,13 +140,15 @@ class App:
         self.set_button.pack()
 
     def screenshotcountvalue(self):
-        self.counter = self.scrnshotctr.get()
+        self.counter = int(self.scrnshotctr.get())
+        print(self.counter)
 
     def screenshot_area_alt_window(self):
         # Create the screenshot area window
         self.screenshot_area_alt_window = tk.Toplevel(self.root)
         self.screenshot_area_alt_window.title("Screenshot Area")
         self.screenshot_area_alt_window.geometry("300x300")
+        self.screenshot_area_alt_window.iconbitmap("icon.ico")
 
         # Create the x1 label
         self.x1_label = tk.Label(self.screenshot_area_alt_window, text="\nSet 1\n\nCoord 1")
@@ -226,24 +210,20 @@ class App:
             tk.messagebox.showerror("Error", "Invalid values. Please enter integers.")
             return
 
-
-
-
     def screenshot_area_window(self):
         # Create the screenshot area window
         self.screenshot_area_window = tk.Toplevel(self.root)
         self.screenshot_area_window.title("Screenshot Area")
         self.screenshot_area_window.geometry("200x80")  # Set the size of the window
+        self.screenshot_area_window.iconbitmap("icon.ico")
 
         # Create the "Scania S" button
         self.set_button = tk.Button(self.screenshot_area_window, text="Scania S", command=self.scania_s_preset)
         self.set_button.pack()
 
-
         # Create the "Volvo FH16" button
         self.set_button = tk.Button(self.screenshot_area_window, text="Volvo FH16", command=self.volvo_fh16_preset)
         self.set_button.pack()
-
 
         # Create the "DAF 2021" button
         self.set_button = tk.Button(self.screenshot_area_window, text="DAF 2021", command=self.daf_2021_preset)
@@ -252,7 +232,7 @@ class App:
     def scania_s_preset(self):
         # Destroy the screenshot area window
         self.screenshot_area_window.destroy()
-        tk.messagebox.showinfo("Preset Loaded.", "Preset Loaded.")
+        tk.messagebox.showinfo("Error", "Scania S does not have a preset.")
         self.screenshot_area = (0, 0, 100, 100)
 
     def volvo_fh16_preset(self):
@@ -278,6 +258,7 @@ class App:
         self.ets2checkmenu = tk.Toplevel(self.root)
         self.ets2checkmenu.title("Screenshot Area")
         self.ets2checkmenu.geometry("160x26")  # Set the size of the window
+        self.ets2checkmenu.iconbitmap("icon.ico")
 
         # Create the "ETS2 Bypass" button
         self.set_button = tk.Button(self.ets2checkmenu, text="ETS2 Check Bypass", command=self.ets2checkbypass)
@@ -287,10 +268,11 @@ class App:
         self.ets2checkmenu.destroy()
         self.ets2checkbypass = tk.Toplevel(self.root)
         self.ets2checkbypass.title("Euro Truck Simulator 2")
-        self.ets2checkbypass.geometry("600x36")
+        self.ets2checkbypass.geometry("400x36")
+        self.ets2checkbypass.iconbitmap("icon.ico")
         T = tk.Text(self.ets2checkbypass, height=2, width=90)
         T.pack()
-        T.insert(tk.END, "This is a dummy window for testing purposes, disable it by going into the Troubleshooting menu and then turning on ETS2 Check Bypass.")  
+        T.insert(tk.END, "This is a dummy window for testing purposes")  
 
     def start_recording(self):
         # Try to find the "Euro Truck Simulator 2" window
@@ -317,6 +299,7 @@ class App:
         if self.recording:
             # Increment the screenshot counter
             self.counter += 1
+            print(self.counter)
 
             # Take screenshot of the defined area
             image = pyautogui.screenshot(region=(668, 313, 700, 400))
@@ -337,7 +320,6 @@ class App:
             self.root.after(int(self.screenshot_interval * 500), self.screenshot_loop)
 
     def change_screenshot_interval(self):
-        # Ask the user for the new interval
         interval = tk.simpledialog.askfloat("Screenshot Interval", "Enter the new screenshot interval (in seconds):", minvalue=0.1, maxvalue=10)
 
         # Check if the user entered a valid interval
@@ -348,4 +330,3 @@ class App:
 # Create the app and start the main loop
 app = App()
 app.root.mainloop()
-
